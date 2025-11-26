@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-primary: 'Montserrat', sans-serif;
+    --font-secondary: 'Cormorant Garamond', serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-primary text-slate-800 font-light;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-secondary font-normal tracking-wide;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply px-6 sm:px-8 lg:px-12 py-20 sm:py-28 lg:py-36;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .elegant-divider {
+    @apply w-16 h-0.5 bg-gradient-to-r from-transparent via-sand-400 to-transparent mx-auto my-8;
+  }
+
+  .ocean-gradient {
+    @apply bg-gradient-to-br from-ocean-500 via-ocean-600 to-slate-700;
+  }
+
+  .beach-gradient {
+    @apply bg-gradient-to-br from-cream-50 via-sand-50 to-ocean-50;
+  }
+}
+

@@ -3,8 +3,21 @@
 import { useState } from 'react'
 import { siteConfig } from '@/config/site.config'
 
+// Tipos para el menú
+interface MenuItem {
+  name: string
+  price?: string
+  description?: string
+}
+
+interface MenuCategoryData {
+  title: string
+  subtitle?: string
+  items: MenuItem[]
+}
+
 // Menú completo organizado por categorías
-const menuData = {
+const menuData: Record<string, MenuCategoryData> = {
   promos: {
     title: 'Promos Todo el Día',
     subtitle: '(Promociones válidas para té o café mediano con leche de vaca)',

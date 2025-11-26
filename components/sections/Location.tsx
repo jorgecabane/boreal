@@ -87,7 +87,7 @@ export default function Location() {
               <div className="bg-gradient-to-br from-ocean-100 via-sand-100 to-cream-100 rounded-none aspect-square relative overflow-hidden p-8">
                 {/* Google Maps Embed */}
                 <iframe
-                  src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${encodeURIComponent(siteConfig.address)}&zoom=16`}
+                  src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=${encodeURIComponent(siteConfig.address)}&zoom=16`}
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

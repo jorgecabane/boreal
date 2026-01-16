@@ -54,7 +54,7 @@ export default function GalleryReal() {
           </h2>
           <div className="elegant-divider"></div>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto mt-8 font-light">
-            Un espacio donde el estilo playero se encuentra con la elegancia provenzal
+            Un espacio donde el estilo playero moderno se encuentra con la elegancia tradicional de Santo Domingo
           </p>
         </div>
 
@@ -92,8 +92,8 @@ export default function GalleryReal() {
         </div>
 
         <div className="mt-16 text-center">
-          <p className="font-secondary text-2xl text-ocean-600 italic font-light">
-            Visítanos y descubre un refugio de tranquilidad en Santo Domingo
+          <p className="font-secondary text-2xl text-ocean-600 font-light">
+            Visítanos y descubre un refugio de relajo y sabor
           </p>
         </div>
       </div>

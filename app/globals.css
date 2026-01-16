@@ -45,5 +45,14 @@
   .beach-gradient {
     @apply bg-gradient-to-br from-cream-50 via-sand-50 to-ocean-50;
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 

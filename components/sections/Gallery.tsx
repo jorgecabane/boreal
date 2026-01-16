@@ -60,8 +60,8 @@ export default function Gallery() {
         </div>
 
         <div className="mt-16 text-center">
-          <p className="text-cream-100 text-lg font-light italic">
-            Visítanos y descubre un refugio de tranquilidad en Santo Domingo
+          <p className="text-cream-100 text-lg font-light">
+            Visítanos y descubre un refugio de relajo y sabor
           </p>
         </div>
       </div>

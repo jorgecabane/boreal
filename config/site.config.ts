@@ -5,7 +5,7 @@ export const siteConfig = {
   name: 'Boreal',
   fullName: 'Concepto Boreal',
   tagline: 'Tómate tu tiempo',
-  description: 'Te esperamos con café de especialidad, brunch sin prisa y un ambiente cálido. Perfecto para leer, trabajar o compartir.',
+  description: 'Te esperamos con café de especialidad, brunch sin prisa y un ambiente cálido. Perfecto para leer, trabajar o disfrutar.',
   
   // Contacto
   phone: '+56 9 9428 9741',

@@ -1,3 +1,6 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import { siteConfig } from '@/config/site.config'
 
 const daysOfWeek = [
@@ -11,12 +14,23 @@ const daysOfWeek = [
 ]
 
 export default function Hours() {
-  const getCurrentDay = () => {
-    const today = new Date().getDay()
-    return today === 0 ? 'sunday' : daysOfWeek[today - 1].key
-  }
+  const [currentDay, setCurrentDay] = useState<string>('monday')
 
-  const currentDay = getCurrentDay()
+  useEffect(() => {
+    const getCurrentDay = () => {
+      const today = new Date().getDay()
+      return today === 0 ? 'sunday' : daysOfWeek[today - 1].key
+    }
+    
+    setCurrentDay(getCurrentDay())
+    
+    // Actualizar cada minuto para detectar cambios de día
+    const interval = setInterval(() => {
+      setCurrentDay(getCurrentDay())
+    }, 60000) // Cada minuto
+    
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <section id="horarios" className="section-padding beach-gradient">
@@ -69,7 +83,7 @@ export default function Hours() {
           </div>
 
           <div className="text-center mt-12">
-            <p className="font-secondary text-xl text-slate-600 italic font-light">
+            <p className="font-secondary text-xl text-slate-600 font-light">
               Sin prisa, con café de especialidad y buen ambiente
             </p>
           </div>

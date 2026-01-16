@@ -23,7 +23,7 @@ export default function Location() {
             <div className="space-y-8">
               <p className="text-xl text-slate-700 leading-relaxed font-light">
                 Con una ubicación privilegiada en el centro de la comuna de Santo Domingo, 
-                <span className="font-secondary text-2xl text-ocean-600 italic"> {siteConfig.fullName} </span>
+                <span className="font-secondary text-2xl text-ocean-600"> {siteConfig.fullName} </span>
                 se ha convertido en un punto de encuentro favorito para residentes y visitantes.
               </p>
               

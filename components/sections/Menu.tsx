@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { siteConfig } from '@/config/site.config'
 
 // Tipos para el menú
@@ -18,87 +18,96 @@ interface MenuCategoryData {
 
 // Menú completo organizado por categorías
 const menuData: Record<string, MenuCategoryData> = {
-  promos: {
-    title: 'Promos Todo el Día',
-    subtitle: '(Promociones válidas para té o café mediano con leche de vaca)',
-    items: [
-      { name: 'CROISSANT', price: '$6.000', description: 'Café mediano + Croissant horneado relleno con queso y jamón.' },
-      { name: 'CLÁSICA', price: '$6.000', description: 'Café mediano + Plancha jamón queso.' },
-      { name: 'ARGENTINA', price: '$4.600', description: 'Café mediano + 2 Media Luna' },
-      { name: 'BARRIS', price: '$6.500', description: 'Café mediano + trozo de Carrot Cake Barris Bakery' },
-      { name: 'CINNAMON', price: '$4.000', description: 'Café mediano + Rollito de canela' },
-      { name: 'TOSTADAS', price: '$4.000', description: 'Dos rebanadas de masa madre o pan del día con dos acompañamientos a elección: mermelada (con y sin azúcar), mantequilla, mantequilla de maní, paté de campo, palta, bruschetta de alcachofa. Cambia a pan Keto $600' },
-    ],
-  },
   brunch: {
-    title: 'Brunch',
+    title: 'BRUNCH',
     subtitle: 'De Lunes a Siempre - De 08:00 a 15:00',
     items: [
-      { name: 'HUEVOS REVUELTOS', price: '$4.500', description: 'Mini cacerola de huevos revueltos con pan masa madre o amasado y mantequilla. Agrega tocino por $1200, Cambia a pan Keto $600' },
-      { name: 'GRANOLA BOWL', price: '$4.800', description: 'Yogurt de kéfir, con granola de avena, quinoa y frutos secos, fruta de temporada y mantequilla de maní.' },
-      { name: 'FRENCH TOAST', price: '$6.000', description: 'Dos deliciosas rebanadas de Molde Brioche al estilo francés, con plátano, fruta de estación, coco y almendras tostadas y syrup de maple.' },
-      { name: 'KETO BREAKY', price: '$6.300', description: 'Huevos revueltos con tocino, palta, tomate Cherry queso crema y dos tostadas keto para acompañar.' },
-      { name: 'TOSTÓN PALTA', price: '$4.200', description: 'Gruesa rebanada de pan masa madre con palta laminada, hojas verdes, semillas de zapallo, sésamo negro y aceite de oliva.' },
-      { name: 'BOREAL', price: '$8.600', description: 'Tostadas con mantequilla, huevos revueltos y palta, 200cc de jugo de fruta y café mediano' },
-      { name: 'BACON & EGG ROLL', price: '$6.000', description: 'Bolla de pan Brioche con Tocino, queso cheddar y huevo frito' },
-      { name: 'BOWL DE FRUTA', price: '$4.000', description: 'Bowl de fruta de temporada, con coco y almendras tostadas.' },
-      { name: 'ENSALADA DEL DÍA', price: '$6.500', description: 'Pregunta por la opción de ensalada disponible.' },
+      { name: 'Huevos revueltos', price: '$5.000', description: 'Mini cacerola de huevos revueltos con pan masa madre o amasado y mantequilla. Agrega tocino por $1200, Cambia a pan Keto $600' },
+      { name: 'Keto breaky', price: '$6.800', description: 'Huevos revueltos con tocino, palta, tomate Cherry, queso crema y dos tostadas keto.' },
+      { name: 'Tostón salmón palta', price: '$5.500', description: 'Gruesa rebanada de pan masa madre untada con queso crema, salmón ahumado y palta, sobre hojas verdes, semillas de zapallo, sésamo negro y aceite de oliva.' },
+      { name: 'Boreal', price: '$9.000', description: 'Tostadas con mantequilla, huevos revueltos y palta, 200cc de jugo de fruta y café mediano.' },
+      { name: 'Bacon & egg roll', price: '$6.000', description: 'Bolla de pan Brioche con tocino, queso cheddar y huevo frito.' },
+      { name: 'Promo ensalada o sopa del día', price: '$7.500', description: 'Ensalada o sopa del día con trozos de pan masa madre o pan de la casa + Jugo a elección.' },
+      { name: 'B-burger', price: '$8.000', description: 'Bolla de pan Brioche, hamburguesa, cheddar, mermelada de cebolla, pepino encurtido, lechuga, tomate cherry, mayonesa, acompañado de chips de camote.' },
+    ],
+  },
+  promos: {
+    title: 'PROMOS TODO EL DÍA',
+    subtitle: '(Promociones válidas para té o café mediano con leche de vaca - descremada, sin lactosa)',
+    items: [
+      { name: 'Croissant', price: '$6.400', description: 'Café mediano + Croissant horneado relleno con queso y jamón.' },
+      { name: 'Clásica', price: '$6.400', description: 'Café mediano + Plancha jamón queso.' },
+      { name: 'Argentina', price: '$5.000', description: 'Café mediano + 2 Media Luna.' },
+      { name: 'Barris', price: '$6.600', description: 'Café mediano + trozo de Carrot Cake Barris Bakery.' },
+      { name: 'Cinnamon', price: '$5.000', description: 'Café mediano + Cinnamon roll.' },
+    ],
+  },
+  bowls: {
+    title: 'BOWLS',
+    items: [
+      { name: 'Bowl Açai', price: '$6.200', description: 'Açai + plátano y frutilla + granola con coco y almendras tostadas + mantequilla de maní crocante.' },
+      { name: 'Bowl granola', price: '$5.200', description: 'Yogurt de kéfir natural + granola + coco y almendras tostadas + fruta de temporada + mantequilla de maní crocante.' },
+      { name: 'Bowl de fruta', price: '$4.000', description: 'Fruta de temporada + coco y almendras tostadas. Agrega mantequilla de maní +$1.000' },
     ],
   },
   sandwich: {
-    title: 'Sándwich',
+    title: 'SANDWICH',
     items: [
-      { name: 'SERRANO', price: '$6.700', description: 'Ciabatta relleno con jamón serrano, pesto, queso mantecoso, hojas verdes' },
-      { name: 'SALMÓN', price: '$6.800', description: 'Ciabatta relleno con salmón ahumado, queso crema, pepinos encurtidos, hojas verdes.' },
-      { name: 'VEGAN', price: '$6.400', description: 'Ciabatta relleno hummus de garbanzo, tomates cherry asados, almendras tostadas, hojas verdes.' },
-      { name: 'CROISSANT JARPA', price: '$4.800', description: 'Croissant relleno con jamón y queso mantecoso derretido.' },
-      { name: 'CROISSANT CAMPESTRE', price: '$5.900', description: 'Croissant relleno con jamón de cerdo, pasta de alcachofa, hojas verdes, tomate asado, queso mantecoso.' },
+      { name: 'Tostadas', price: '$4.800', description: 'Dos rebanadas de pan masa madre o pan del día con dos acompañamientos a elección: mermelada (con y sin azúcar), mantequilla, mantequilla de maní, paté de campo, bruschetta de alcachofa. Cambia a pan Keto $600, Agrega palta +$600' },
+      { name: 'Serrano', price: '$6.800', description: 'Ciabatta con jamón serrano, pesto, queso mantecoso y hojas verdes.' },
+      { name: 'Salmón', price: '$6.900', description: 'Ciabatta con salmón ahumado, queso crema, pepinos encurtidos y hojas verdes.' },
+      { name: 'Vegan', price: '$6.800', description: 'Ciabatta con hummus de garbanzo, palta, champiñones salteados con sésamo, lechuga y tomates cherry asados.' },
+      { name: 'Croissant campestre', price: '$6.500', description: 'Croissant relleno con jamón de cerdo, pasta de alcachofa, hojas verdes y tomate cherry asado, queso mantecoso.' },
+      { name: 'Croissant jarpa', price: '$4.800', description: 'Croissant con jamón y queso mantecoso derretido.' },
+      { name: 'Croissant serralta', price: '$7.000', description: 'Croissant con jamón serrano, queso mantecoso, palta y tomates cherry asados. Agrega chips de camote +$1.000' },
     ],
   },
   cosasricas: {
-    title: 'Cosas Ricas',
+    title: 'COSAS RICAS',
     items: [
-      { name: 'TROZO DE TORTA', price: '$4.000', description: 'Pregunta por las variedades disponibles: cheesecake, carrot cake, apple pie, triple chocolate.' },
-      { name: 'MUFFIN', price: '$2.500', description: 'Pregunta por sabores disponibles.' },
-      { name: 'MUFFIN RELLENO', price: '$2.800', description: 'Pregunta por sabores disponibles.' },
-      { name: 'MASITA RELLENA DEL DIA', price: '$2.000', description: 'Pregunta por sabores disponibles.' },
-      { name: 'MACARONS x 3 UNIDADES', price: '$2.600', description: 'Pregunta por sabores disponibles.' },
-      { name: 'MINI BERLIN RELLENO (x2)', price: '$2.000' },
-      { name: 'BROWNIE', price: '$2.000' },
-      { name: 'KINKI BROWNIE', price: '$2.800', description: 'Pregunta por sabores disponibles (mantequilla maní, cookie, chocolate, salty caramelo)' },
-      { name: 'MEDIA LUNA', price: '$1.600' },
-      { name: 'BERLIN PASTELERA', price: '$2.200' },
-      { name: 'BRETZEL CHOCOLATE', price: '$3.200' },
-      { name: 'CINNAMON ROLL', price: '$2.300' },
+      { name: 'Trozo de torta', price: '$4.000', description: 'Pregunta por las variedades disponibles: Cheese cake, Carrot cake, Apple Pie, Panqueque Trufa, Caluga, Triple Chocolate.' },
+      { name: 'Muffin', price: '$2.800', description: 'Pregunta por sabores disponibles.' },
+      { name: 'Muffin relleno', price: '$3.000', description: 'Pregunta por sabores disponibles.' },
+      { name: 'Masita rellena del día', price: '$2.000', description: 'Pregunta por sabores disponibles.' },
+      { name: 'Macarons x 3 unidades', price: '$2.600', description: 'Pregunta por sabores disponibles.' },
+      { name: 'Galletones Aonaki', price: '$2.700', description: 'Pregunta por sabores disponibles: Chips, Doble Chocolate, Berries.' },
+      { name: 'Brownie especial', price: '$2.800', description: 'Pregunta por sabores disponibles: mantequilla de maní, cookie, chocolate, salty caramel.' },
+      { name: 'Mini berlín relleno (x2)', price: '$2.200' },
+      { name: 'Media luna', price: '$1.800' },
+      { name: 'Berlín pastelera', price: '$2.200' },
+      { name: 'Bretzel chocolate', price: '$3.200' },
+      { name: 'Cinnamon roll', price: '$2.700' },
+      { name: 'Brownie', price: '$2.000' },
     ],
   },
   helados: {
-    title: 'Helados',
+    title: 'HELADOS',
     items: [
-      { name: 'HELADO SIMPLE', price: '$2.800' },
-      { name: 'HELADO DOBLE', price: '$4.000' },
-      { name: 'HELADO TRIPLE', price: '$5.000' },
-      { name: 'BROWNIE CON HELADO', price: '$4.200', description: 'Brownie calentito con una bola de helado encima y salsa de chocolate.' },
-      { name: 'WAFFLE CON HELADO', price: '$4.900', description: 'Waffle azucarado calientito con una bola de helado, crema chantilly y salsa de chocolate.' },
+      { name: 'Helado simple', price: '$2.900' },
+      { name: 'Helado doble', price: '$5.000' },
+      { name: 'Helado triple', price: '$6.900' },
+      { name: 'Brownie con helado', price: '$4.400', description: 'Brownie calentito con una bola de helado encima y salsa de chocolate.' },
+      { name: 'Waffle con helado', price: '$5.000', description: 'Waffle azucarado calientito con una bola de helado, crema chantilly y salsa de chocolate.' },
     ],
   },
   keto: {
-    title: 'Queques Keto',
+    title: 'QUEQUES ESPECIALES',
     items: [
-      { name: 'QUEQUE ARÁNDANO', price: '$2.600', description: 'Sin gluten, sin azúcar y bajo en carbohidratos. A base de harina de almendras y coco.' },
-      { name: 'BROWNIE KETO', description: 'Sin gluten, sin azúcar, sin lactosa y bajo en carbohidratos. A base de harina de almendras y chocolate amargo 85%.' },
-      { name: 'QUEQUE LIMON AMAPOLA', description: 'Sin gluten, sin azúcar, sin lactosa y bajo en carbohidratos. Hecho a base de harina de almendras.' },
+      { name: 'Queque arándano keto', price: '$3.100', description: 'Sin gluten, sin azúcar, bajo en carbohidratos. A base de harina de almendras y coco.' },
+      { name: 'Brownie keto', description: 'Sin gluten, sin azúcar, sin lactosa, bajo en carbohidratos. A base de harina de almendras y chocolate amargo 85%.' },
+      { name: 'Queque limón amapola', description: 'Sin gluten, sin azúcar, sin lactosa, bajo en carbohidratos. A base de harina de almendras.' },
+      { name: 'Queque pera dátiles', description: 'Sin gluten, sin azúcar, sin lactosa, bajo en carbohidratos. A base de harina de almendras.' },
     ],
   },
   singluten: {
-    title: 'Queques Sin Gluten',
+    title: 'QUEQUES SIN GLUTEN',
     subtitle: 'Endulzados con azúcar de caña y elaborados con huevos de gallinas libres y aceite 100% maravilla.',
     items: [
-      { name: 'ZANAHORIA', price: '$2.900', description: 'Zanahoria, harina de garbanzos nueces y almendras.' },
-      { name: 'FRAMBUESA ARÁNDANO', description: 'Frambuesas y arándanos, harina de almendras, harina de garbanzos, chuño, mantequilla sin sal.' },
-      { name: 'TÉ VERDE Y CHOCOLATE BLANCO', description: 'Té verde molido, harina de garbanzos, crema de leche, mantequilla sin sal, chocolate blanco.' },
-      { name: 'NARANJA AVELLANA (Vegano)', description: 'Harina de garbanzos, jugo de naranja, harina de avellanas, semillas de linaza, zeste de naranja.' },
-      { name: 'CHOCOLATE (Vegano)', description: 'Chocolate amargo 65 %, cacao, leche de coco, harina de garbanzos, harina de linaza, coco rallado, cacao amargo, con una moneda de chocolate negro en su interior.' },
+      { name: 'Frambuesa arándano', price: '$3.100', description: 'Frambuesas y arándanos, harina de almendras, harina de garbanzos, chuño, mantequilla sin sal.' },
+      { name: 'Zanahoria (sin azúcar)', description: 'Zanahoria, harina de garbanzos, nueces y almendras.' },
+      { name: 'Té verde y chocolate blanco', description: 'Té verde molido, harina de garbanzos, crema, leche, mantequilla sin sal, chocolate blanco.' },
+      { name: 'Naranja avellana (Vegano)', description: 'Harina de garbanzos, jugo de naranja, harina de avellanas, semillas de linaza, zeste de naranja.' },
+      { name: 'Chocolate (Vegano sin azúcar)', description: 'Chocolate amargo 65%, cacao, leche de coco, harina de garbanzos, harina de linaza, coco rallado, cacao amargo, con una moneda de chocolate negro en su interior.' },
     ],
   },
 }
@@ -106,17 +115,36 @@ const menuData: Record<string, MenuCategoryData> = {
 type MenuCategory = keyof typeof menuData
 
 export default function Menu() {
-  const [activeTab, setActiveTab] = useState<MenuCategory>('promos')
+  const [activeTab, setActiveTab] = useState<MenuCategory>('brunch')
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const categories: { key: MenuCategory; label: string; icon: string }[] = [
-    { key: 'promos', label: 'Promos', icon: '🎉' },
     { key: 'brunch', label: 'Brunch', icon: '🥐' },
+    { key: 'promos', label: 'Promos', icon: '🎉' },
+    { key: 'bowls', label: 'Bowls', icon: '🥣' },
     { key: 'sandwich', label: 'Sándwich', icon: '🥪' },
     { key: 'cosasricas', label: 'Dulces', icon: '🍰' },
     { key: 'helados', label: 'Helados', icon: '🍨' },
     { key: 'keto', label: 'Keto', icon: '🥑' },
     { key: 'singluten', label: 'Sin Gluten', icon: '🌾' },
   ]
+
+  const handleCategoryClick = (categoryKey: MenuCategory, buttonElement: HTMLButtonElement) => {
+    setActiveTab(categoryKey)
+    
+    // Scroll automático para mobile - poner el botón como primer elemento visible
+    if (scrollContainerRef.current && buttonElement) {
+      const container = scrollContainerRef.current
+      const buttonLeft = buttonElement.offsetLeft
+      const gap = 12 // gap-3 = 12px
+      
+      // Scroll para que el botón quede al inicio (con un pequeño padding)
+      container.scrollTo({
+        left: Math.max(0, buttonLeft - gap),
+        behavior: 'smooth'
+      })
+    }
+  }
 
   return (
     <section id="menu" className="section-padding bg-white relative overflow-hidden">
@@ -137,12 +165,15 @@ export default function Menu() {
 
         {/* Tabs de categorías */}
         <div className="max-w-5xl mx-auto mb-12">
-          <div className="flex flex-wrap justify-center gap-3 mb-8">
+          <div 
+            ref={scrollContainerRef}
+            className="flex md:flex-wrap md:justify-center gap-3 mb-8 overflow-x-auto pb-2 scrollbar-hide md:overflow-x-visible"
+          >
             {categories.map((category) => (
               <button
                 key={category.key}
-                onClick={() => setActiveTab(category.key)}
-                className={`px-6 py-3 rounded-none font-light tracking-wider transition-all duration-300 ${
+                onClick={(e) => handleCategoryClick(category.key, e.currentTarget)}
+                className={`px-6 py-3 rounded-none font-light tracking-wider transition-all duration-300 whitespace-nowrap flex-shrink-0 ${
                   activeTab === category.key
                     ? 'bg-ocean-600 text-white shadow-lg'
                     : 'bg-cream-50 text-slate-700 hover:bg-sand-100 border border-sand-200'

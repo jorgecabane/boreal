@@ -16,13 +16,29 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    const targetId = href.replace('#', '')
+    const element = document.getElementById(targetId)
+    if (element) {
+      const headerOffset = 80
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+  }
+
   const menuItems = [
     { label: 'Inicio', href: '#inicio' },
     { label: 'Nosotros', href: '#nosotros' },
     { label: 'Menú', href: '#menu' },
     { label: 'Galería', href: '#galeria' },
     { label: 'Horarios', href: '#horarios' },
-    { label: 'Contacto', href: '#contacto' },
+    { label: 'Contacto', href: '#ubicacion' },
   ]
 
   return (
@@ -37,6 +53,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           <a 
             href="#inicio" 
+            onClick={(e) => handleNavClick(e, '#inicio')}
             className="flex items-center gap-3 group"
           >
             <Image
@@ -57,6 +74,7 @@ export default function Header() {
               <li key={item.href}>
                 <a
                   href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
                   className={`font-light tracking-wider transition-colors text-sm uppercase ${
                     isScrolled 
                       ? 'text-slate-700 hover:text-ocean-600' 
@@ -102,7 +120,10 @@ export default function Header() {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => {
+                    handleNavClick(e, item.href)
+                    setIsMenuOpen(false)
+                  }}
                   className={`block font-light tracking-wider transition-colors text-sm uppercase ${
                     isScrolled 
                       ? 'text-slate-700 hover:text-ocean-600' 

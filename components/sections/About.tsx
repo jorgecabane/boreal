@@ -19,19 +19,18 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <p className="text-xl text-slate-700 leading-relaxed font-light">
-                La Cafetería <span className="font-secondary text-2xl text-ocean-600 italic">«{siteConfig.fullName}»</span>, 
+                La Cafetería <span className="font-secondary text-2xl text-ocean-600">«{siteConfig.fullName}»</span>, 
                 anclada en la comuna de Santo Domingo, es un refugio acogedor que ofrece una experiencia 
                 única para los amantes del café.
               </p>
               
               <p className="text-xl text-slate-700 leading-relaxed font-light">
-                Nuestro ambiente <span className="text-ocean-600 font-normal">ecléctico</span> combina el 
-                estilo playero con toques de una particular modernidad provenzal, creando un espacio cálido 
+                Nuestro ambiente <span className="text-ocean-600 font-normal">playero</span> con toques de una particular modernidad mediterránea, creando un espacio cálido 
                 y relajante donde disfrutar de un exquisito café.
               </p>
               
               <p className="text-xl text-slate-700 leading-relaxed font-light">
-                Situados en una <span className="text-sand-600 font-normal">casona antigua</span>, icono de 
+                Situados en un espacio <span className="text-sand-600 font-normal">ícono</span> de 
                 la comuna, donde convergen varios emprendedores que juntos añaden un toque especial a la experiencia.
               </p>
 
@@ -59,7 +58,7 @@ export default function About() {
                 {/* Overlay sutil con texto */}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
                   <div className="p-8 w-full">
-                    <p className="font-secondary text-3xl text-white italic">
+                    <p className="font-secondary text-3xl text-white">
                       Café de Especialidad
                     </p>
                     <p className="text-cream-200 font-light mt-2">

@@ -35,7 +35,7 @@ export default function Hero() {
           
           <div className="elegant-divider bg-gradient-to-r from-transparent via-cream-300 to-transparent"></div>
           
-          <p className="font-secondary text-3xl sm:text-4xl text-cream-100 mb-6 font-light italic">
+          <p className="font-secondary text-3xl sm:text-4xl text-cream-100 mb-6 font-light">
             {siteConfig.tagline}
           </p>
           

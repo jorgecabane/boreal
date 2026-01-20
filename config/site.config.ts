@@ -14,13 +14,13 @@ export const siteConfig = {
   
   // Horarios
   hours: {
-    monday: { open: '8:00', close: '20:00' },
-    tuesday: { open: '8:00', close: '20:00' },
-    wednesday: { open: '8:00', close: '20:00' },
-    thursday: { open: '8:00', close: '20:00' },
-    friday: { open: '8:00', close: '20:00' },
-    saturday: { open: '9:30', close: '20:00' },
-    sunday: { open: '9:30', close: '19:30' },
+    monday: { open: '8:00', close: '20:30' },
+    tuesday: { open: '8:00', close: '20:30' },
+    wednesday: { open: '8:00', close: '20:30' },
+    thursday: { open: '8:00', close: '20:30' },
+    friday: { open: '8:00', close: '20:30' },
+    saturday: { open: '9:30', close: '20:30' },
+    sunday: { open: '9:30', close: '20:00' },
   },
   
   // Características destacadas

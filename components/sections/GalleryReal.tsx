@@ -50,7 +50,7 @@ export default function GalleryReal() {
       <div className="container-custom relative z-10">
         <div className="text-center mb-20">
           <h2 className="font-secondary text-5xl sm:text-6xl lg:text-7xl font-light text-ocean-700 mb-8 tracking-wide">
-            Nuestra Galería
+            GALERÍA
           </h2>
           <div className="elegant-divider"></div>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto mt-8 font-light">

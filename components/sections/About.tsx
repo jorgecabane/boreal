@@ -11,7 +11,7 @@ export default function About() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-secondary text-5xl sm:text-6xl lg:text-7xl font-light text-ocean-700 mb-8 tracking-wide">
-              Sobre Nosotros
+              SOBRE NOSOTROS
             </h2>
             <div className="elegant-divider"></div>
           </div>

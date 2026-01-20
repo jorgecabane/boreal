@@ -81,6 +81,26 @@ export default function Location() {
                   Llamar
                 </a>
               </div>
+
+              {/* Link sutil para dejar review */}
+              <div className="pt-6 border-t border-sand-200">
+                <p className="text-slate-600 font-light text-sm mb-3 text-center">
+                  ¿Ya nos visitaste?
+                </p>
+                <a
+                  href="https://g.page/r/CZmp-3X0W0w5EBE/review"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 text-ocean-600 hover:text-ocean-700 font-light text-sm tracking-wide transition-colors duration-300 group mx-auto"
+                >
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                  <span className="border-b border-ocean-300 group-hover:border-ocean-600 transition-colors">
+                    Comparte tu experiencia en Google
+                  </span>
+                </a>
+              </div>
             </div>
 
             <div className="relative">

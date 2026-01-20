@@ -85,6 +85,18 @@ export default function Footer() {
                   </svg>
                 </a>
               )}
+              <a
+                href="https://g.page/r/CZmp-3X0W0w5EBE/review"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cream-200 hover:text-cream-100 transition-colors transform hover:scale-110 duration-300"
+                aria-label="Dejar reseña en Google"
+                title="Dejar una reseña en Google"
+              >
+                <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              </a>
             </div>
             <p className="mt-8 text-cream-200/70 text-sm font-light">
               Lunes a Domingo<br />

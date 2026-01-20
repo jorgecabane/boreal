@@ -2,19 +2,19 @@ import Image from 'next/image'
 
 const galleryImages = [
   {
-    src: '/images/gallery/interior-1.webp',
+    src: '/images/gallery/interior-1.jpg',
     alt: 'Interior acogedor de Boreal con mural marino',
     title: 'Nuestro Espacio',
     description: 'Ambiente cálido y acogedor',
   },
   {
-    src: '/images/gallery/coffee-1.webp',
+    src: '/images/gallery/coffee-1.jpg',
     alt: 'Café con latte art',
-    title: 'Café Artesanal',
+    title: 'Café de especialidad',
     description: 'Preparado con dedicación',
   },
   {
-    src: '/images/gallery/exterior-1.webp',
+    src: '/images/gallery/exterior-1.jpg',
     alt: 'Exterior de la cafetería Boreal',
     title: 'Fachada',
     description: 'En el corazón de Santo Domingo',
@@ -22,8 +22,8 @@ const galleryImages = [
   {
     src: '/images/gallery/coffee-2.webp',
     alt: 'Café de especialidad',
-    title: 'Especialidad',
-    description: 'Selección premium',
+    title: 'Brunch',
+    description: 'Abanico gastronómico',
   },
   {
     src: '/images/gallery/exterior-2.webp',

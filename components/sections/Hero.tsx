@@ -22,9 +22,16 @@ export default function Hero() {
       {/* Contenido */}
       <div className="container-custom section-padding text-center relative z-10 animate-fade-in">
         <div className="max-w-4xl mx-auto">
-          <h1 className="font-secondary text-6xl sm:text-7xl lg:text-8xl font-light text-white mb-6 text-balance tracking-wider">
-            {siteConfig.name}
-          </h1>
+          <div className="mb-6 flex justify-center">
+            <Image
+              src="/images/logos/logo.svg"
+              alt={siteConfig.name}
+              width={600}
+              height={140}
+              className="w-full max-w-[600px] h-auto brightness-0 invert drop-shadow-2xl"
+              priority
+            />
+          </div>
           
           <div className="elegant-divider bg-gradient-to-r from-transparent via-cream-300 to-transparent"></div>
           

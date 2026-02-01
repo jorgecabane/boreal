@@ -48,7 +48,7 @@ export default function Hero() {
               href="#menu"
               className="group px-10 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 rounded-none font-normal tracking-wider hover:bg-white hover:text-ocean-700 transition-all duration-300 text-lg"
             >
-              Descubrir el Menú
+              Descubrir la Carta
             </a>
             <a
               href="#nosotros"

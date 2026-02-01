@@ -35,7 +35,7 @@ export default function Header() {
   const menuItems = [
     { label: 'Inicio', href: '#inicio' },
     { label: 'Nosotros', href: '#nosotros' },
-    { label: 'Menú', href: '#menu' },
+    { label: 'Carta', href: '#menu' },
     { label: 'Galería', href: '#galeria' },
     { label: 'Horarios', href: '#horarios' },
     { label: 'Contacto', href: '#ubicacion' },

@@ -1,18 +1,22 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { siteConfig } from '@/config/site.config'
 
 // Tipos para el menú
 interface MenuItem {
   name: string
   price?: string
+  priceSmall?: string
+  priceLarge?: string
   description?: string
+  isVegan?: boolean
 }
 
 interface MenuCategoryData {
   title: string
   subtitle?: string
+  hasSizes?: boolean
   items: MenuItem[]
 }
 
@@ -112,13 +116,98 @@ const menuData: Record<string, MenuCategoryData> = {
   },
 }
 
+// Menú de bebidas organizado por categorías
+const drinksData: Record<string, MenuCategoryData> = {
+  basecafe: {
+    title: 'BASE CAFÉ',
+    items: [
+      { name: 'Ristretto', price: '$2.000' },
+      { name: 'Espresso', price: '$2.000' },
+      { name: 'Espresso Lungo', price: '$2.000' },
+      { name: 'Espresso Doble Shot', price: '$3.400' },
+      { name: 'Espresso Machiato', price: '$2.800' },
+      { name: 'Americano', price: '$2.800' },
+      { name: 'Americano Doble Shot', price: '$4.000' },
+      { name: 'Americano Grande', price: '$4.000' },
+      { name: 'Cortado', price: '$3.200' },
+      { name: 'Cortado Doble', price: '$4.000' },
+      { name: 'Cortado Grande', price: '$4.200' },
+      { name: 'Capuccino', price: '$3.200' },
+      { name: 'Latte', price: '$3.800' },
+      { name: 'Café Vienes', price: '$3.600' },
+      { name: 'Café Vienes Grande', price: '$4.200' },
+      { name: 'Mockaccino', price: '$3.600' },
+      { name: 'Mockalatte', price: '$4.200' },
+    ],
+  },
+  bebidasfrias: {
+    title: 'BEBIDAS FRÍAS',
+    items: [
+      { name: 'Iced Latte', price: '$4.000', description: 'Hielo + leche + 2 shot de espresso.' },
+      { name: 'Café Helado', price: '$4.900', description: '2 bolas de helado de vainilla (o a elección) + leche + 2 shot espresso + crema batida + salsa de chocolate.' },
+      { name: 'Afogatto', price: '$4.000', description: '1 bola de helado de vainilla (o a elección) + 1 shot de café espresso caliente.' },
+      { name: 'Iced Chai Latte', price: '$3.600', description: 'Hielo + leche + mix chai.' },
+      { name: 'Iced Matcha Latte', price: '$3.600', description: 'Hielo + leche + té matcha.' },
+      { name: 'Iced Frambuesa Matcha', price: '$4.000', description: 'Frambuesas congeladas + leche + matcha + syrup de frambuesa.' },
+      { name: 'Iced Espresso Dubai', price: '$4.600', description: 'Salsa y syrup de chocolate + pasta y syrup de pistacho + hielo + leche + 2 shot de espresso + kataifi.' },
+      { name: 'Matcha Sorbet', price: '$4.600', description: 'Bola sorbet a elección + leche de coco + matcha.', isVegan: true },
+      { name: 'Espresso Naranja', price: '$3.600', description: 'Hielo + 2 shot espresso + jugo de naranja.' },
+      { name: 'Espresso Tonica', price: '$3.600', description: 'Hielo + 2 shot espresso + tónica.' },
+    ],
+  },
+  basete: {
+    title: 'BASE TÉ',
+    subtitle: 'Vive la experiencia IngenuiTea de Adagio Teas. La mejor selección de té en hebras: English Breakfast, Earl Grey Bravo, Rooibos Vainilla, Verde Citrus, Masala Chai, Deleite Cúrcuma, Berries, Foxtrot.',
+    items: [
+      { name: 'Tetera Ingenuitea', price: '$3.900' },
+      { name: 'Taza de Té con Leche', price: '$3.300', description: 'Bolsita.' },
+      { name: 'Taza de Té', price: '$3.000', description: 'Bolsita.' },
+    ],
+  },
+  calientes: {
+    title: 'OTRAS BEBIDAS CALIENTES',
+    hasSizes: true,
+    items: [
+      { name: 'Chocolate Caliente', priceSmall: '$3.400', priceLarge: '$4.000' },
+      { name: 'Chocolate Avellana', priceSmall: '$3.900', priceLarge: '$4.500' },
+      { name: 'Chocolate Menta', priceSmall: '$3.900', priceLarge: '$4.500' },
+      { name: 'Chocolate Chai', priceSmall: '$3.900', priceLarge: '$4.500' },
+      { name: 'Chai Latte', priceSmall: '$3.400', priceLarge: '$4.000' },
+      { name: 'Spicy Chai Latte', priceSmall: '$3.400', priceLarge: '$4.000', isVegan: true },
+      { name: 'Power Chai Latte', priceSmall: '$3.400', priceLarge: '$4.000' },
+      { name: 'Golden Milk', priceSmall: '$3.400', priceLarge: '$4.000', isVegan: true },
+      { name: 'Matcha Latte', priceSmall: '$3.400', priceLarge: '$4.000', isVegan: true },
+      { name: 'Dirty Chai', priceSmall: '$3.900', priceLarge: '$4.500', isVegan: true },
+      { name: 'Babyccino', priceSmall: '$2.800', isVegan: true },
+    ],
+  },
+  otrasfrias: {
+    title: 'OTRAS BEBIDAS FRÍAS',
+    subtitle: 'Pregunte a nuestro staff por variedades disponibles.',
+    items: [
+      { name: 'Agua con y sin gas', price: '$2.200' },
+      { name: 'Coca Cola Original, Light, Zero', price: '$2.200' },
+      { name: 'Sprite Zero', price: '$2.200' },
+      { name: 'Fanta Zero', price: '$2.200' },
+      { name: 'Jugos Prensados en Frío AMA', price: '$3.000', description: 'Botella.' },
+      { name: 'Jugo AMA Cajita', price: '$1.800' },
+      { name: 'Kombucha Botella', price: '$3.600' },
+      { name: 'Jugos de Pulpa o Natural', price: '$3.800' },
+    ],
+  },
+}
+
 type MenuCategory = keyof typeof menuData
+type DrinksCategory = keyof typeof drinksData
+type MainSection = 'comer' | 'beber'
 
 export default function Menu() {
-  const [activeTab, setActiveTab] = useState<MenuCategory>('brunch')
+  const [mainSection, setMainSection] = useState<MainSection>('comer')
+  const [activeFoodTab, setActiveFoodTab] = useState<MenuCategory>('brunch')
+  const [activeDrinksTab, setActiveDrinksTab] = useState<DrinksCategory>('basecafe')
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
-  const categories: { key: MenuCategory; label: string; icon: string }[] = [
+  const foodCategories: { key: MenuCategory; label: string; icon: string }[] = [
     { key: 'brunch', label: 'Brunch', icon: '🥐' },
     { key: 'promos', label: 'Promos', icon: '🎉' },
     { key: 'bowls', label: 'Bowls', icon: '🥣' },
@@ -129,22 +218,58 @@ export default function Menu() {
     { key: 'singluten', label: 'Sin Gluten', icon: '🌾' },
   ]
 
-  const handleCategoryClick = (categoryKey: MenuCategory, buttonElement: HTMLButtonElement) => {
-    setActiveTab(categoryKey)
-    
-    // Scroll automático para mobile - poner el botón como primer elemento visible
+  const drinksCategories: { key: DrinksCategory; label: string; icon: string }[] = [
+    { key: 'basecafe', label: 'Café', icon: '☕' },
+    { key: 'bebidasfrias', label: 'Frío', icon: '🧊' },
+    { key: 'basete', label: 'Té', icon: '🍵' },
+    { key: 'calientes', label: 'Calientes', icon: '🔥' },
+    { key: 'otrasfrias', label: 'Refrescos', icon: '🥤' },
+  ]
+
+  const handleFoodCategoryClick = (categoryKey: MenuCategory, buttonElement: HTMLButtonElement) => {
+    setActiveFoodTab(categoryKey)
+    scrollToButton(buttonElement)
+  }
+
+  const handleDrinksCategoryClick = (categoryKey: DrinksCategory, buttonElement: HTMLButtonElement) => {
+    setActiveDrinksTab(categoryKey)
+    scrollToButton(buttonElement)
+  }
+
+  const scrollToButton = (buttonElement: HTMLButtonElement) => {
     if (scrollContainerRef.current && buttonElement) {
       const container = scrollContainerRef.current
       const buttonLeft = buttonElement.offsetLeft
-      const gap = 12 // gap-3 = 12px
-      
-      // Scroll para que el botón quede al inicio (con un pequeño padding)
+      const gap = 12
       container.scrollTo({
         left: Math.max(0, buttonLeft - gap),
         behavior: 'smooth'
       })
     }
   }
+
+  // Resetear scroll y categoría cuando cambia la sección principal
+  useEffect(() => {
+    // Resetear a la primera categoría de cada sección
+    if (mainSection === 'comer') {
+      setActiveFoodTab('brunch')
+    } else {
+      setActiveDrinksTab('basecafe')
+    }
+    
+    // Resetear scroll al inicio
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({
+        left: 0,
+        behavior: 'smooth'
+      })
+    }
+  }, [mainSection])
+
+  // Datos activos según la sección
+  const activeData = mainSection === 'comer' 
+    ? menuData[activeFoodTab] 
+    : drinksData[activeDrinksTab]
 
   return (
     <section id="menu" className="section-padding bg-white relative overflow-hidden">
@@ -155,7 +280,7 @@ export default function Menu() {
       <div className="container-custom relative z-10">
         <div className="text-center mb-16">
           <h2 className="font-secondary text-5xl sm:text-6xl lg:text-7xl font-light text-ocean-700 mb-8 tracking-wide">
-            MENÚ
+            CARTA
           </h2>
           <div className="elegant-divider"></div>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto mt-8 font-light leading-relaxed">
@@ -163,62 +288,149 @@ export default function Menu() {
           </p>
         </div>
 
-        {/* Tabs de categorías */}
+        {/* Segmented Control - Comer / Beber */}
+        <div className="max-w-md mx-auto mb-10">
+          <div className="flex bg-sand-100 p-1.5 rounded-none border border-sand-200">
+            <button
+              onClick={() => setMainSection('comer')}
+              className={`flex-1 py-3.5 px-6 font-light tracking-widest text-sm transition-all duration-300 flex items-center justify-center gap-2 ${
+                mainSection === 'comer'
+                  ? 'bg-white text-ocean-700 shadow-sm'
+                  : 'text-slate-500 hover:text-slate-700'
+              }`}
+            >
+              <span className="text-lg">🍽️</span>
+              COMER
+            </button>
+            <button
+              onClick={() => setMainSection('beber')}
+              className={`flex-1 py-3.5 px-6 font-light tracking-widest text-sm transition-all duration-300 flex items-center justify-center gap-2 ${
+                mainSection === 'beber'
+                  ? 'bg-white text-ocean-700 shadow-sm'
+                  : 'text-slate-500 hover:text-slate-700'
+              }`}
+            >
+              <span className="text-lg">☕</span>
+              BEBER
+            </button>
+          </div>
+        </div>
+
+        {/* Tabs de subcategorías */}
         <div className="max-w-5xl mx-auto mb-12">
           <div 
             ref={scrollContainerRef}
             className="flex md:flex-wrap md:justify-center gap-3 mb-8 overflow-x-auto pb-2 scrollbar-hide md:overflow-x-visible"
           >
-            {categories.map((category) => (
-              <button
-                key={category.key}
-                onClick={(e) => handleCategoryClick(category.key, e.currentTarget)}
-                className={`px-6 py-3 rounded-none font-light tracking-wider transition-all duration-300 whitespace-nowrap flex-shrink-0 ${
-                  activeTab === category.key
-                    ? 'bg-ocean-600 text-white shadow-lg'
-                    : 'bg-cream-50 text-slate-700 hover:bg-sand-100 border border-sand-200'
-                }`}
-              >
-                <span className="mr-2">{category.icon}</span>
-                {category.label}
-              </button>
-            ))}
+            {mainSection === 'comer' ? (
+              foodCategories.map((category) => (
+                <button
+                  key={category.key}
+                  onClick={(e) => handleFoodCategoryClick(category.key, e.currentTarget)}
+                  className={`px-6 py-3 rounded-none font-light tracking-wider transition-all duration-300 whitespace-nowrap flex-shrink-0 ${
+                    activeFoodTab === category.key
+                      ? 'bg-ocean-600 text-white shadow-lg'
+                      : 'bg-cream-50 text-slate-700 hover:bg-sand-100 border border-sand-200'
+                  }`}
+                >
+                  <span className="mr-2">{category.icon}</span>
+                  {category.label}
+                </button>
+              ))
+            ) : (
+              drinksCategories.map((category) => (
+                <button
+                  key={category.key}
+                  onClick={(e) => handleDrinksCategoryClick(category.key, e.currentTarget)}
+                  className={`px-6 py-3 rounded-none font-light tracking-wider transition-all duration-300 whitespace-nowrap flex-shrink-0 ${
+                    activeDrinksTab === category.key
+                      ? 'bg-ocean-600 text-white shadow-lg'
+                      : 'bg-cream-50 text-slate-700 hover:bg-sand-100 border border-sand-200'
+                  }`}
+                >
+                  <span className="mr-2">{category.icon}</span>
+                  {category.label}
+                </button>
+              ))
+            )}
           </div>
 
           {/* Contenido de la categoría activa */}
           <div className="bg-gradient-to-br from-cream-50/50 to-sand-50/50 border border-sand-200 rounded-none p-8 sm:p-12 min-h-[500px]">
             <div className="text-center mb-8">
               <h3 className="font-secondary text-4xl font-light text-ocean-700 tracking-wider mb-2">
-                {menuData[activeTab].title}
+                {activeData.title}
               </h3>
-              {menuData[activeTab].subtitle && (
-                <p className="text-slate-600 font-light text-sm mt-2">
-                  {menuData[activeTab].subtitle}
+              {activeData.subtitle && (
+                <p className="text-slate-600 font-light text-sm mt-2 max-w-2xl mx-auto">
+                  {activeData.subtitle}
                 </p>
               )}
               <div className="w-12 h-0.5 bg-sand-400 mx-auto mt-6"></div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              {menuData[activeTab].items.map((item, index) => (
+            {/* Header para tamaños si aplica */}
+            {activeData.hasSizes && (
+              <div className="max-w-4xl mx-auto mb-4">
+                <div className="flex justify-end gap-8 pr-4 text-sm font-light text-slate-500 tracking-wider">
+                  <span className="w-16 text-center">CHICO</span>
+                  <span className="w-16 text-center">GRANDE</span>
+                </div>
+              </div>
+            )}
+            
+            <div className={`grid gap-6 max-w-4xl mx-auto ${
+              activeData.hasSizes ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'
+            }`}>
+              {activeData.items.map((item, index) => (
                 <div 
                   key={index} 
                   className="border-b border-sand-200/50 pb-4 hover:bg-white/50 p-4 rounded-none transition-all duration-300"
                 >
-                  <div className="flex justify-between items-start mb-2">
-                    <h4 className="font-secondary text-lg text-slate-800 font-normal">
-                      {item.name}
-                    </h4>
-                    {item.price && (
-                      <span className="text-ocean-600 font-normal ml-4 whitespace-nowrap">
-                        {item.price}
-                      </span>
-                    )}
-                  </div>
-                  {item.description && (
-                    <p className="text-sm text-slate-600 font-light leading-relaxed">
-                      {item.description}
-                    </p>
+                  {activeData.hasSizes ? (
+                    // Layout para items con dos precios (Chico/Grande)
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-2">
+                        <h4 className="font-secondary text-lg text-slate-800 font-normal">
+                          {item.name}
+                        </h4>
+                        {item.isVegan && (
+                          <span className="text-green-600 text-sm" title="Opción vegana disponible">🌿</span>
+                        )}
+                      </div>
+                      <div className="flex gap-8">
+                        <span className="text-ocean-600 font-normal w-16 text-center">
+                          {item.priceSmall || '—'}
+                        </span>
+                        <span className="text-ocean-600 font-normal w-16 text-center">
+                          {item.priceLarge || '—'}
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    // Layout estándar
+                    <>
+                      <div className="flex justify-between items-start mb-2">
+                        <div className="flex items-center gap-2">
+                          <h4 className="font-secondary text-lg text-slate-800 font-normal">
+                            {item.name}
+                          </h4>
+                          {item.isVegan && (
+                            <span className="text-green-600 text-sm" title="Opción vegana disponible">🌿</span>
+                          )}
+                        </div>
+                        {item.price && (
+                          <span className="text-ocean-600 font-normal ml-4 whitespace-nowrap">
+                            {item.price}
+                          </span>
+                        )}
+                      </div>
+                      {item.description && (
+                        <p className="text-sm text-slate-600 font-light leading-relaxed">
+                          {item.description}
+                        </p>
+                      )}
+                    </>
                   )}
                 </div>
               ))}

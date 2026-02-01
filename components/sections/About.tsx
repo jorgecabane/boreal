@@ -39,7 +39,7 @@ export default function About() {
                   href="#menu"
                   className="inline-block px-8 py-4 border-2 border-ocean-600 text-ocean-700 rounded-none font-light tracking-wider hover:bg-ocean-600 hover:text-white transition-all duration-300"
                 >
-                  Explorar el Menú
+                  Explorar la Carta
                 </a>
               </div>
             </div>

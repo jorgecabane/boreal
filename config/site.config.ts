@@ -9,7 +9,7 @@ export const siteConfig = {
   
   // Contacto
   phone: '+56 9 9428 9741',
-  email: 'conceptoboreal@gmail.com',
+  email: 'cafe@conceptoboreal.cl',
   address: 'Av. Tte. Luis Cruz Martinez 42, Santo Domingo',
   
   // Horarios

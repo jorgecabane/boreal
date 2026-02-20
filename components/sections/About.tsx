@@ -19,19 +19,12 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <p className="text-xl text-slate-700 leading-relaxed font-light">
-                La Cafetería <span className="font-secondary text-2xl text-ocean-600">«{siteConfig.fullName}»</span>, 
-                anclada en la comuna de Santo Domingo, es un refugio acogedor que ofrece una experiencia 
-                única para los amantes del café.
+                <span className="font-secondary text-2xl text-ocean-600">«{siteConfig.name}» </span> 
+                nace del sueño familiar de vivir y compartir la paz de Santo Domingo. Somos un refugio diseñado entre la brisa del mar y el confort de un buen café de especialidad; un lugar para pausar y reconectar.
               </p>
               
               <p className="text-xl text-slate-700 leading-relaxed font-light">
-                Nuestro ambiente <span className="text-ocean-600 font-normal">playero</span> con toques de una particular modernidad mediterránea, creando un espacio cálido 
-                y relajante donde disfrutar de un exquisito café.
-              </p>
-              
-              <p className="text-xl text-slate-700 leading-relaxed font-light">
-                Situados en un espacio <span className="text-sand-600 font-normal">ícono</span> de 
-                la comuna, donde convergen varios emprendedores que juntos añaden un toque especial a la experiencia.
+                Con <span className="text-ocean-600 font-normal">alma de hogar</span> y <span className="text-sand-600 font-normal">esencia playera</span>, creamos un puente entre lo artesanal y lo saludable. Nuestra carta nace de esa unión, ofreciendo desde opciones Keto y sin gluten hasta un café de especialidad preparado con dedicación. Te invitamos a descubrir este refugio donde el tiempo se detiene. Disfruta la vida al ritmo de Boreal.
               </p>
 
               <div className="pt-8">
@@ -48,7 +41,7 @@ export default function About() {
               {/* Imagen de café de especialidad */}
               <div className="relative aspect-[3/4] rounded-none overflow-hidden shadow-2xl group">
                 <Image
-                  src="/images/gallery/coffee-specialty.jpg"
+                  src="/images/gallery/about-us.jpg"
                   alt="Café de especialidad preparado con dedicación"
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"

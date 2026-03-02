@@ -16,7 +16,7 @@ export const siteConfig = {
   hours: {
     monday: { open: '8:00', close: '20:00' },
     tuesday: { open: '8:00', close: '20:00' },
-    wednesday: { open: '8:00', close: '20:30' },
+    wednesday: { open: '8:00', close: '20:00' },
     thursday: { open: '8:00', close: '20:00' },
     friday: { open: '8:00', close: '20:00' },
     saturday: { open: '9:30', close: '20:00' },

@@ -19,7 +19,7 @@ export default function Home() {
       <GalleryReal />
       {/* <Features /> */}
       <Menu />
-      <Events />
+      {/* <Events /> */}
       <Hours />
       <Location />
       {/* <Contact /> */}

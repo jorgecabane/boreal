@@ -56,11 +56,12 @@ const menuData: Record<string, MenuCategoryData> = {
     title: 'COSAS RICAS',
     items: [
       { name: 'Trozo de torta', price: '$4.000', description: 'Pregunta por las variedades disponibles: Cheesecake, Carrotcake, Apple Pie, Caluga o Panqueque Trufa, según disponibilidad.' },
+      { name: 'Croissant dulce relleno', price: '$5.200', description: 'Croissant neutro relleno con crema de pistacho o mantequilla de maní, frutillas, plátano, crema chantilly y salsa de chocolate.' },
       { name: 'Muffin', price: '$3.000', description: 'Pregunta por sabores disponibles.' },
       { name: 'Muffin relleno', price: '$3.200', description: 'Pregunta por sabores disponibles.' },
       { name: 'Masita rellena del día', price: '$2.000', description: 'Pregunta por sabores disponibles.' },
-      { name: 'Macarons x 3 unidades', price: '$2.800', description: 'Pregunta por sabores disponibles.' },
-      { name: 'Galletones', price: '$2.700', description: 'Pregunta por sabores disponibles.' },
+      { name: 'Macarons x 3 unidades', price: '$2.900', description: 'Pregunta por sabores disponibles.' },
+      { name: 'Galletones La Gracia', price: '$3.500', description: 'Sin azúcar, sin gluten.' },
       { name: 'Brownie básico', price: '$2.000', description: 'Esponjoso y húmedo con doble chocolate.' },
       { name: 'Brownies supremos', price: '$2.900', description: 'Pregunta por sabores disponibles: mantequilla maní, cookie, chocolate, caramelo salado.' },
       { name: 'Mini berlín relleno (x2)', price: '$2.200' },
@@ -104,9 +105,9 @@ const menuData: Record<string, MenuCategoryData> = {
       { name: 'Queque té verde y chocolate blanco (sin gluten)', price: '$3.200', description: 'Té verde molido, harina de garbanzos, crema de leche, mantequilla sin sal, azúcar de caña orgánica, chocolate blanco. (Sin certificación celíaca).' },
       { name: 'Queque naranja avellana (sin trigo, vegano, sin azúcar)', price: '$3.200', description: 'Harina de garbanzos, jugo de naranja, harina de avellanas, semillas de linaza, zeste de naranja, alulosa.', isVegan: true },
       { name: 'Queque chocolate (sin trigo, vegano, sin azúcar)', price: '$3.200', description: 'Chocolate amargo 65%, cacao, leche de coco, harina de garbanzos, harina de linaza, coco rallado, cacao amargo, alulosa, con una moneda de chocolate negro en su interior. (Sin certificación celíaca).', isVegan: true },
-      { name: 'Snickers keto', price: '$3.000', description: 'Keto, sin gluten, sin azúcar. Barrita de base de almendras, mantequilla de maní, maní tostado, toffee artesanal y cobertura de chocolate sin azúcar.' },
-      { name: 'Pie de limón', price: '$3.500', description: 'Sin gluten, sin azúcar, low carb. Cuadrito en base de almendras, relleno de crema de limón con leche condensada artesanal sin azúcar y merengue sin azúcar.' },
-      { name: 'Kuchen de manzana', price: '$3.500', description: 'Sin gluten, sin azúcar, low carb. Cuadrito en base de almendras, finas láminas de manzana con suave crema de vainilla sin azúcar.' },
+      { name: 'Snickers keto', price: '$3.200', description: 'Keto, sin gluten, sin azúcar. Barrita de base de almendras, mantequilla de maní, maní tostado, toffee artesanal y cobertura de chocolate sin azúcar.' },
+      { name: 'Pie de limón', price: '$4.000', description: 'Sin gluten, sin azúcar, low carb. Cuadrito en base de almendras, relleno de crema de limón con leche condensada artesanal sin azúcar y merengue sin azúcar.' },
+      { name: 'Kuchen de manzana', price: '$4.000', description: 'Sin gluten, sin azúcar, low carb. Cuadrito en base de almendras, finas láminas de manzana con suave crema de vainilla sin azúcar.' },
     ],
   },
 }
@@ -119,17 +120,18 @@ const drinksData: Record<string, MenuCategoryData> = {
       { name: 'Ristretto', price: '$2.000' },
       { name: 'Espresso', price: '$2.000' },
       { name: 'Espresso Lungo', price: '$2.000' },
-      { name: 'Espresso Doble Shot', price: '$3.400' },
+      { name: 'Espresso Doble Shot', price: '$2.800' },
       { name: 'Espresso Machiato', price: '$2.800' },
       { name: 'Americano', price: '$2.800' },
-      { name: 'Americano Doble Shot', price: '$4.000' },
-      { name: 'Americano Grande', price: '$4.000' },
-      { name: 'Cortado', price: '$3.200' },
+      { name: 'Americano Doble Shot', price: '$3.900' },
+      { name: 'Americano Grande', price: '$3.900' },
+      { name: 'Cortado', price: '$3.300' },
       { name: 'Cortado Doble', price: '$4.000' },
-      { name: 'Cortado Grande', price: '$4.200' },
+      { name: 'Cortado Grande', price: '$4.300' },
       { name: 'Capuccino', price: '$3.200' },
+      { name: 'Flat White', price: '$3.200' },
       { name: 'Latte', price: '$3.800' },
-      { name: 'Café Vienes', price: '$3.600' },
+      { name: 'Café Vienes', price: '$3.700' },
       { name: 'Café Vienes Grande', price: '$4.200' },
       { name: 'Mockaccino', price: '$3.600' },
       { name: 'Mockalatte', price: '$4.200' },
@@ -139,13 +141,12 @@ const drinksData: Record<string, MenuCategoryData> = {
     title: 'BEBIDAS FRÍAS',
     items: [
       { name: 'Iced Latte', price: '$4.000', description: 'Hielo + leche + 2 shot de espresso.' },
-      { name: 'Café Helado', price: '$4.900', description: '2 bolas de helado de vainilla (o a elección) + leche + 2 shot espresso + crema batida + salsa de chocolate.' },
+      { name: 'Café Helado', price: '$5.100', description: '2 bolas de helado de vainilla (o a elección) + leche + 2 shot espresso + crema batida + salsa de chocolate.' },
       { name: 'Afogatto', price: '$4.000', description: '1 bola de helado de vainilla (o a elección) + 1 shot de café espresso caliente.' },
-      { name: 'Iced Chai Latte', price: '$3.600', description: 'Hielo + leche + mix chai.' },
-      { name: 'Iced Matcha Latte', price: '$3.600', description: 'Hielo + leche + té matcha.' },
-      { name: 'Iced Frambuesa Matcha', price: '$4.000', description: 'Frambuesas congeladas + leche + matcha + syrup de frambuesa.' },
+      { name: 'Iced Chai Latte', price: '$3.700', description: 'Hielo + leche + mix chai.' },
+      { name: 'Iced Matcha Latte', price: '$3.700', description: 'Hielo + leche + té matcha.' },
+      { name: 'Iced Frambuesa Matcha', price: '$4.200', description: 'Frambuesas congeladas + leche + matcha + syrup de frambuesa.' },
       { name: 'Iced Espresso Dubai', price: '$4.600', description: 'Salsa y syrup de chocolate + pasta y syrup de pistacho + hielo + leche + 2 shot de espresso + kataifi.' },
-      { name: 'Matcha Sorbet', price: '$4.600', description: 'Bola sorbet a elección + leche de coco + matcha.', isVegan: true },
       { name: 'Espresso Naranja', price: '$3.600', description: 'Hielo + 2 shot espresso + jugo de naranja.' },
       { name: 'Espresso Tonica', price: '$3.600', description: 'Hielo + 2 shot espresso + tónica.' },
     ],
@@ -184,10 +185,19 @@ const drinksData: Record<string, MenuCategoryData> = {
       { name: 'Coca Cola Original, Light, Zero', price: '$2.200' },
       { name: 'Sprite Zero', price: '$2.200' },
       { name: 'Fanta Zero', price: '$2.200' },
-      { name: 'Jugos Prensados en Frío AMA', price: '$3.000', description: 'Botella.' },
+      { name: 'Jugos Prensados en Frío AMA', price: '$3.100', description: 'Botella.' },
       { name: 'Jugo AMA Cajita', price: '$1.800' },
-      { name: 'Kombucha Botella', price: '$3.600' },
+      { name: 'Kombucha Botella', price: '$4.000' },
       { name: 'Jugos de Pulpa o Natural', price: '$3.800' },
+    ],
+  },
+  extras: {
+    title: 'EXTRAS',
+    items: [
+      { name: 'Leche Vegetal', price: '$600' },
+      { name: 'Extra Shot Café', price: '$1.000' },
+      { name: 'Extra Crema', price: '$700' },
+      { name: 'Sabores', price: '$500', description: 'Vainilla, caramelo, avellana, amaretto, chocolate, pistacho, frambuesa.' },
     ],
   },
 }
@@ -217,6 +227,7 @@ export default function Menu() {
     { key: 'basete', label: 'Té', icon: '🍵' },
     { key: 'calientes', label: 'Calientes', icon: '🔥' },
     { key: 'otrasfrias', label: 'Refrescos', icon: '🥤' },
+    { key: 'extras', label: 'Extras', icon: '➕' },
   ]
 
   const handleFoodCategoryClick = (categoryKey: MenuCategory, buttonElement: HTMLButtonElement) => {
@@ -366,7 +377,7 @@ export default function Menu() {
             {activeData.hasSizes && (
               <div className="max-w-4xl mx-auto mb-4">
                 <div className="flex justify-end gap-8 pr-4 text-sm font-light text-slate-500 tracking-wider">
-                  <span className="w-16 text-center">CHICO</span>
+                  <span className="w-16 text-center">MEDIANO</span>
                   <span className="w-16 text-center">GRANDE</span>
                 </div>
               </div>

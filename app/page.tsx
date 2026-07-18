@@ -15,13 +15,13 @@ export default function Home() {
     <main className="min-h-screen">
       <Header />
       <Hero />
-      <About />
       <GalleryReal />
       {/* <Features /> */}
       <Menu />
       {/* <Events /> */}
       <Hours />
       <Location />
+      <About />
       {/* <Contact /> */}
       <Footer />
     </main>
